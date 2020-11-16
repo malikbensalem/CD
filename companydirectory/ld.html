@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MB Directory</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="libs/css/main.css">
+  <link rel="stylesheet" href="libs/css/ld.css">
+  <script src="libs/js/ld.js"></script>
+
+
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1 id="top">Company Directory</h1>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <button onclick="document.location='add'">Add</button>
+    </div>
+    <div class="col-sm-6">
+      <button onclick="document.location='index'">Personnel</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="items">
+
+</div>
+
+<div class="overlay"id="overLocation">
+  <div class="over">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2> Location</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <p>Location:</p>
+      </div>
+      <div class="col-sm-10">
+        <input id="location" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <button onclick="off(this.parentElement.parentElement.parentElement.parentElement)">Back</button>
+      </div>
+      <div class="col-sm-6">
+        <button onclick="insertLocation()">Add</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="overlay"id="overDepartment">
+  <div class="over">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2> Department</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <p>Department:</p>
+      </div>
+      <div class="col-sm-10">
+        <input type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <p>Location:</p>
+      </div>
+      <div class="col-sm-10">
+        <select id="locationSele">
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <button onclick="off(this.parentElement.parentElement.parentElement.parentElement)">Back</button>
+      </div>
+      <div class="col-sm-6">
+        <button onclick="">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay"id="overPersonnel">
+  <div class="over">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2> Personnel</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <p>First name:</p>
+      </div>
+      <div class="col-sm-10">
+        <input type="text" id="fame">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <p>Last name:</p>
+      </div>
+      <div class="col-sm-10">
+        <input id="lame" type="text">
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-2">
+        <p>Email:</p>
+      </div>
+      <div class="col-sm-10">
+        <input id="email" type="text">
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-2">
+        <p>JobTitle:</p>
+      </div>
+      <div class="col-sm-10">
+        <input id="job" type="text">
+  
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2">
+        <p>Department:</p>
+      </div>
+      <div class="col-sm-10">
+        <select id="department">
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <button onclick="off(this.parentElement.parentElement.parentElement.parentElement)">Back</button>
+      </div>
+      <div class="col-sm-6">
+        <button onclick="addPersonnel()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+    <button onclick="document.location='#Department'">Department</button>
+    <button onclick="document.location='#top'">Top</button>
+    <button onclick="document.location='#Location'">Location</button>
+  </div>
+</div>
+
+</div>
+
+
+</body>
+</html>

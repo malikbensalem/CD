@@ -1,0 +1,37 @@
+
+@font-face {
+  font-family: Montserrat;
+  src: url(Montserrat-Regular.ttf);
+  font-weight: bold;
+}
+body{
+  padding-bottom: 50px;
+  font-family: 'Montserrat', sans-serif;
+}
+select,button,input{
+  width: 100%;
+  margin: 5px;
+}
+button{
+  border-color:white;
+  border-style:double;
+}
+a{
+  color:black;
+}
+.items{
+  border: 2px solid lightgray;
+  margin:2px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: lightgray;
+  text-align: center;
+}
+.footer button{
+  width: 29%;
+}
