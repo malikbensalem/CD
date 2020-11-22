@@ -10,6 +10,14 @@ $(window).on('load', function() {
     }
   })
 })
+function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
+  document.getElementById('confirmation').style.display = "block";
+  document.getElementById('confirmation').style.backgroundColor = cc;
+  document.getElementById('confirmationTxt').innerHTML=txt;
+  document.getElementById('confirmationImg').src=img;
+
+  setTimeout(() => document.getElementById('confirmation').style.display = "none", 5000);
+}
 
 function resetSele(iid,item){
   $.ajax({
@@ -43,15 +51,15 @@ function insertLocation(){
       lame: $("#location").val(),
       },
     success: function(result){
-      flashColour(document.getElementById("location").parentElement.parentElement.parentElement,"limegreen");  
+      flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');  
       resetSele("locationSele","locations");
     },
-    error:function(result, textStatus, xhr){
-      flashColour(document.getElementById("location").parentElement.parentElement.parentElement);
+    error:function(){
+      flashColour();
     }
   });
   else{
-    flashColour(document.getElementById("location").parentElement.parentElement.parentElement,"#ffcc00");
+    flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png');
   }
 }
 function fillLocationSele(){
@@ -64,12 +72,6 @@ function fillLocationSele(){
     }
   })
 }
-function flashColour(e,cc="mediumvioletred"){
-  //limegreen
-  //#ffcc00
-  e.style.borderColor = cc;
-  setTimeout(() => e.style.borderColor = "lightgray", 1000);
-}
 function insertDepartment(){
   if ($("#dep").val()&&!$("#dep").val().split(/[ a-zA-Z \-]/).join("")){
   $.ajax({
@@ -81,15 +83,15 @@ function insertDepartment(){
       lid: $("#locationSele").val(),
     },
     success: function(result){
-      flashColour(document.getElementById("dep").parentElement.parentElement.parentElement,"limegreen");  
+      flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');  
       resetSele("department","departments");
     },
-    error:function(result, textStatus, xhr){     
-      flashColour(document.getElementById("dep").parentElement.parentElement.parentElement);  
+    error:function(){     
+      flashColour();  
     }
   })
 }else{
-  flashColour(document.getElementById("dep").parentElement.parentElement.parentElement,"#ffcc00");  
+  flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png');  
 }
 }
 function addPersonnel(){
@@ -107,19 +109,19 @@ function addPersonnel(){
       department: $("#department").val()
     },
     success: function(result){
-      flashColour(document.getElementById("fame").parentElement.parentElement.parentElement,"limegreen");  
+      flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');  
 
     },
-    error:function(result, textStatus, xhr){
-      flashColour(document.getElementById("fame").parentElement.parentElement.parentElement);  
+    error:function(){
+      flashColour();  
     }
   });
 }
 else{ 
-  flashColour(document.getElementById("fame").parentElement.parentElement.parentElement,"#ffcc00");  
+  flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png');  
 
 }
 }else{
-  flashColour(document.getElementById("fame").parentElement.parentElement.parentElement,"#ffcc00");  
+  flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png');  
 }
 }

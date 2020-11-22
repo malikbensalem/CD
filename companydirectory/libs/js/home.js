@@ -1,8 +1,24 @@
-function column(row,ele,temp,size="2"){
-  col=document.createElement("input");
+function off(e){
+  e.style.display="none";
+}
+
+function on(id,first,last,email,job,department){
+  document.getElementById('personnel').classList="overlay "+id;
+  $('#overFirstName').val(first);
+  $('#overLastName').val(last);
+  $('#overEmail').val(email);
+  $('#overJob').val(job);
+  $('#overDepartment')[0].childNodes.forEach(element => {
+    if (element.innerHTML==department) {
+      $('#overDepartment').val(element.value)
+    }
+  });
+  document.getElementById('personnel').style.display="block";
+}
+function column(row,ele,size="1"){
+  col=document.createElement("p");
   $(col).addClass("col-lg-"+size);
-  $(col).val(ele);
-  col.placeholder="Enter "+temp+" here...";
+  col.innerHTML=ele;
   row.appendChild(col);
 }
 function getPersonnelByID(e){
@@ -14,7 +30,13 @@ function getPersonnelByID(e){
       pid:e.id
     },
     success: function(result) {
+      e.childNodes[0].innerHTML = result['data'][0]['firstName'];
+      e.childNodes[1].innerHTML = result['data'][0]['lastName'];
+      e.childNodes[2].innerHTML = result['data'][0]['email'];
+      e.childNodes[3].innerHTML = result['data'][0]['jobTitle'];
+      e.childNodes[4].innerHTML = result['data'][0]['department'];
       e.childNodes[5].innerHTML = result['data'][0]['location'];
+
       e.classList=`row items ${result['data'][0]['firstName']} ${result['data'][0]['lastName']} ${result['data'][0]['email']} ${result['data'][0]['department']} ${result['data'][0]['location']} ${result['data'][0]['jobTitle']}`;
     }
   })
@@ -65,28 +87,31 @@ function options(row,iid,element,size,vals="") {
   $(sel).val(element.split(" ").join("0"))    
   row.appendChild(sel);  
 }
-function btn(row,txt,size=0){
+function btn(row,txt,size=1){
   rem= document.createElement("button");
   rem.appendChild(document.createTextNode(txt));
-  $(rem).addClass("col-lg-1").addClass("col-sm-"+(5+size));
+  $(rem).addClass("col-lg-"+size);
   row.appendChild(rem);  
-  if (txt=="Save"){
-
     rem.addEventListener("click", function(){
-      update(row)
-    })  
-  }
-  else{
-    rem.addEventListener("click", function(){
-      dele(row)
+      on(row.id,row.childNodes[0].innerHTML,row.childNodes[1].innerHTML,row.childNodes[2].innerHTML,row.childNodes[3].innerHTML,row.childNodes[4].innerHTML);
     })
-  }
+  
 }
 function txt(row,ele){
   col=document.createElement("p");
   $(col).addClass("col-lg-1");
   col.appendChild(document.createTextNode(ele));
   row.appendChild(col);
+
+}
+function popDep(res,iid){
+  for (let i = 0; i < res.length; i++) {        
+        op=document.createElement("option");
+        op.appendChild(document.createTextNode(res[i]['name']));
+        $(op).val(res[i]['id'])
+        document.getElementById(iid).appendChild(op);
+      }
+      
 
 }
 $(window).on('load', function() {
@@ -101,14 +126,10 @@ $(window).on('load', function() {
       popSel(result['data']['person'],'email','email');
       popSel(result['data']['person'],'jobTitle','jobTitle');
       popSel(result['data']['location'],'location');
-      
-      for (let i = 0; i < result['data']['department'].length; i++) {        
-        op=document.createElement("option");
-        op.appendChild(document.createTextNode(result['data']['department'][i]['name']));
-        $(op).val(result['data']['department'][i]['id'])
-        document.getElementById("department").appendChild(op);
-      }
-    }
+      popDep(result['data']['department'],"department")
+      popDep(result['data']['department'],"overDepartment")
+
+     }
   })
   ).done(function(){
     $.ajax({
@@ -121,18 +142,15 @@ $(window).on('load', function() {
 
           $(row).addClass("row").addClass("items").addClass(element['firstName']).addClass(element['lastName'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")).addClass(element['jobTitle'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")).addClass(element['email'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")).addClass(element['dip']).addClass(element['location'].split(" ").join(""));
           row.id=element['id'];
-          txt(row,element['id']);
+         
+          column(row,element['firstName']);
+          column(row,element['lastName']);
+          column(row,element['email'],"3");
+          column(row,element['jobTitle']);
+          column(row,element['department'],"2");
+          column(row,element['location'],"2");
 
-          column(row,element['firstName'],"First Name","1");
-          column(row,element['lastName'],"Last Name","1");
-          column(row,element['email'],"Email");
-          column(row,element['jobTitle'],"Job","1");
-
-          txt(row,element['location']);          
-          options(row,"department",element['dip'],"2")
-
-          btn(row,"Remove");
-          btn(row,"Save",1);
+          btn(row,"Edit");
           
           document.getElementById("items").appendChild(row);
         });
@@ -140,11 +158,14 @@ $(window).on('load', function() {
     })
   })
 })
-function flashColour(e,cc="mediumvioletred"){
-  //limegreen
-  //#ffcc00
-  e.style.borderColor = cc;
-  setTimeout(() => e.style.borderColor = "lightgray", 1000);
+
+function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
+  document.getElementById('confirmation').style.display = "block";
+  document.getElementById('confirmation').style.backgroundColor = cc;
+  document.getElementById('confirmationTxt').innerHTML=txt;
+  document.getElementById('confirmationImg').src=img;
+
+  setTimeout(() => document.getElementById('confirmation').style.display = "none", 5000);
 }
 
 function search(e){
@@ -170,38 +191,38 @@ function searcher(classes,disType="flex") {
   }  
 }
 
-function update(e){
-  if (e.childNodes[1].value&&e.childNodes[2].value&&e.childNodes[3].value&&e.childNodes[4].value&&e.childNodes[6].value)
+function update(e,first,last,email,job,department){
+  if (first&&last&&email&&job&&department)
   {
-    if (e.childNodes[3].value.match(/\S+@\S+\.\S+/)&&!e.childNodes[1].value.split(/[ a-zA-Z \-]/).join("")&&!e.childNodes[2].value.split(/[ a-zA-Z \-]/).join("")&&!e.childNodes[4].value.split(/[ a-zA-Z \-]/).join("")){
+    if (email.match(/\S+@\S+\.\S+/)&&!first.split(/[ a-zA-Z \-]/).join("")&&!last.split(/[ a-zA-Z \-]/).join("")&&!job.split(/[ a-zA-Z \-]/).join("")){
       $.ajax({
         url: "libs/php/updatePersonnel.php",
   type: 'POST',
   dataType: 'json',
   data: {
-    'fame': e.childNodes[1].value,
-    'lame': e.childNodes[2].value,
-    'email': e.childNodes[3].value,
-    'jobTitle': e.childNodes[4].value,
-    'did': e.childNodes[6].value,
+    'fame': first,
+    'lame': last,
+    'jobTitle': job,
+    'email': email,
+    'did': department,
     'pid': e.id
   },
   success:function(result){
     getPersonnelByID(e);
-    flashColour(e,"limegreen");
+    flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');
   },
   error:function(){
-    flashColour(e);
+    flashColour();
   }
 })
 }
 else{
-  flashColour(e,"#ffcc00")
+  flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png')
 
 }
   }
   else{
-    flashColour(e,"#ffcc00")
+  flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png')
   }
 }
 
@@ -216,6 +237,7 @@ function dele(e){
     },
     success:function(){
       e.remove()
+      off(document.getElementById('personnel'))
     }
   })  
 }

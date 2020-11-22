@@ -33,7 +33,7 @@ if (!$linked) {
 	
   $output['status']['code'] = "200";
   $output['status']['name'] = "ok";
-  $output['status']['description'] = "success";
+  $output['status']['description'] = "SUCCESS";
   $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
   $output['data'] = [$result];
   mysqli_close($conn);
@@ -42,7 +42,7 @@ if (!$linked) {
 else {
   $output['status']['code'] = "200";
   $output['status']['name'] = "ok";
-  $output['status']['description'] = "Cannot delete department if their is a link with personnel!";
+  $output['status']['description'] = "ERROR: Linked with personnel!";
   $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
   mysqli_close($conn);
   echo json_encode($output);

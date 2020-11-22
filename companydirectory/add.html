@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>MB Directory</title>
   <meta charset="utf-8">
-  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png"/>
+  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="vendors/bootstrap.css">
+  <script src="vendors/jquery.js"></script>
+  <script src="vendors/popper.js"></script>
+  <script src="vendors/bootstrap.js"></script>
   <link rel="stylesheet" href="libs/css/main.css">
   <link rel="stylesheet" href="libs/css/add.css">
-  <script src="libs/js/add.js"></script>
-
 </head>
+
 <body>
 
-<div class="jumbotron text-center">
-  <h1 id="top">Company Directory</h1>
-
-  <div class="row">
-    <div class="col-sm-6">
-      <button onclick="document.location='ld'">Location / Department</button>
-    </div>
-    <div class="col-sm-6">
-      <button onclick="document.location='index'">Personnel</button>
+  <div class="header text-center">
+    <h1 id="top">Company Directory</h1>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <button onclick="document.location='ld.html'">Location / Department</button>
+      </div>
+      <div class="col-sm-4">
+        <button onclick="document.location='../companydirectory/'">Personnel</button>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="container">
+ 
+  <div class="container">
     <div class="items">
       <div class="row">
         <div class="col-lg-12">
@@ -37,21 +37,24 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>Location:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <input id="location" type="text">
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-11">
+        <div class="col-sm-5">
+        </div>
+
+        <div class="col-sm-6">
           <button onclick="insertLocation()">Add</button>
         </div>
-  
+
       </div>
     </div>
-  
+
     <div class="items">
       <div class="row">
         <div class="col-lg-12">
@@ -59,29 +62,31 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>Department:</p>
         </div>
-        <div class="col-sm-9">
-          <input type="text" id="dep"> 
+        <div class="col-sm-6">
+          <input type="text" id="dep">
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>Location:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <select id="locationSele">
           </select>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-11">
+        <div class="col-sm-5">
+        </div>
+        <div class="col-sm-6">
           <button onclick="insertDepartment()">Add</button>
         </div>
       </div>
     </div>
-  
+
     <div class="items">
       <div class="row">
         <div class="col-lg-12">
@@ -89,61 +94,62 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>First name:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <input type="text" id="fame">
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>Last name:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <input id="lame" type="text">
         </div>
       </div>
-    
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>Email:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <input id="email" type="text">
         </div>
       </div>
-      
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>JobTitle:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <input id="job" type="text">
-    
         </div>
       </div>
-  
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-5">
           <p>Department:</p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <select id="department">
           </select>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-11">
+        <div class="col-sm-5">
+        </div>
+        <div class="col-sm-6">
           <button onclick="addPersonnel()">Add</button>
         </div>
       </div>
     </div>
+  </div>
+  
+  <div id="confirmation">
+    <img id="confirmationImg" width="39">
+    <p id="confirmationTxt"></p>
+  </div>
 
-<div class="footer">
-  <button onclick="document.location='#top'">Top</button>
-
-</div>
-
+  <script src="libs/js/add.js"></script>
 </body>
+
 </html>

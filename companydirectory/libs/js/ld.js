@@ -1,4 +1,6 @@
-
+function off(e){
+  e.style.display="none";
+}
 function column(row,ele,size="6"){
   col = document.createElement("div");
   $(col).addClass("col-lg-"+size);
@@ -8,43 +10,36 @@ function column(row,ele,size="6"){
 
 function editable(row,elem){
   div=document.createElement("div")
-  $(div).addClass("col-lg-8");
-  ele=document.createElement("input");
-  $(ele).val(elem);
+  $(div).addClass("col-sm-9");
+  ele=document.createElement("p");
+  $(ele).html(elem);
   div.appendChild(ele);
   row.appendChild(div);
 }
+function on(iid,ld,cl,vid="#location"){
+  $(vid).val(ld)
+  document.getElementById(iid).style.display="block";
+  document.getElementById(iid).classList=`overlay ${cl[3]} ${cl[2]}`;
+}
 
-function btnL(row,txt,size=0){
+
+function btnL(row,txt){
   rem= document.createElement("button");
   rem.appendChild(document.createTextNode(txt));
-  $(rem).addClass("col-lg-"+(1+size)).addClass("col-sm-"+(5+size));
-  if (txt=="Save"){
-    rem.addEventListener("click", function(){
-      updateLocation(row)
-    })  
-  }
-  else{
-    rem.addEventListener("click", function(){
-      deleteLocation(row)
-    })    
-  }
+  $(rem).addClass("col-sm-2");
+  rem.addEventListener("click", function(){
+    on("overLocation",row.childNodes[0].childNodes[0].innerHTML,row.classList);
+  })
+  
   row.appendChild(rem);
 }
-function btnD(row,txt,size=0){
+function btnD(row,txt){
   rem= document.createElement("button");
   rem.appendChild(document.createTextNode(txt));
-  $(rem).addClass("col-lg-"+(1+size)).addClass("col-sm-"+(5+size));
-  if (txt=="Save"){
-    rem.addEventListener("click", function(){
-      updateDepartment(row)
-    })  
-  }
-  else{
-    rem.addEventListener("click", function(){
-      deleteDepartment(row)
-    })    
-  }
+  $(rem).addClass("col-sm-2");
+  rem.addEventListener("click", function(){
+    on("overDepartment",row.childNodes[0].childNodes[0].innerHTML,row.classList,"#department");
+  })
   row.appendChild(rem);
 }
 function loop(res,op){
@@ -58,12 +53,10 @@ function loop(res,op){
     $(row).addClass("row").addClass("items").addClass(op).addClass(element['id']);
     editable(row,element['name'])
     if (op=='Department'){
-      btnD(row,"Remove");
-      btnD(row,"Save",1);
+      btnD(row,"Edit");
     }
     else{
-      btnL(row,"Remove");
-      btnL(row,"Save",1);   
+      btnL(row,"Edit");
     }
     document.getElementById("items").appendChild(row);
   });
@@ -89,11 +82,13 @@ function fillLocationSele(){
   })
 }
 
-function flashColour(e,cc="mediumvioletred"){
-  //limegreen
-  //#ffcc00
-  e.style.borderColor = cc;
-  setTimeout(() => e.style.borderColor = "lightgray", 1000);
+function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
+  document.getElementById('confirmation').style.display = "block";
+  document.getElementById('confirmation').style.backgroundColor = cc;
+  document.getElementById('confirmationTxt').innerHTML=txt;
+  document.getElementById('confirmationImg').src=img;
+
+  setTimeout(() => document.getElementById('confirmation').style.display = "none", 5000);
 }
 
 function popSel(res) {
@@ -104,92 +99,123 @@ function popSel(res) {
     document.getElementById("locationSele").appendChild(op);
   });
 }
-function deleteDepartment(e){
+function deleteDepartment(){
   $.ajax({
     url: "libs/php/deleteDepartment.php",
     type: "POST",
     dataType: "json",
     data: {
-      did: e.classList[3],
+      did: document.getElementById('overDepartment').classList[1],
     },
     success:function(result){
-      if (result['status']['description']=="success"){
-        flashColour(e,"limegreen");
-        e.remove();
+      if (result['status']['description']=="SUCCESS"){
+        flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');
+        $("."+document.getElementById('overDepartment').classList[2]+"."+document.getElementById('overDepartment').classList[1]+".items")[0].remove();
+        off(document.getElementById('overDepartment'))
       }
       else{
-        flashColour(e)
+        flashColour(result['status']['description']);
       }
     },
-    error:function(a,s,d){
-      flashColour(e)
+    error:function(){
+      flashColour();
     }
   });
 }
-function deleteLocation(e){
+function deleteLocation(){
   $.ajax({
     url: "libs/php/deleteLocation.php",
     type: "POST",
     dataType: "json",
     data: {
-      lid: e.classList[3],
+      lid: document.getElementById('overLocation').classList[1],
     },
     success:function(result){
-      if (result['status']['description']=="Success"){
-        flashColour(e,"limegreen");
-        e.remove();
+      if (result['status']['description']=="SUCCESS"){
+        flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');
+        $("."+document.getElementById('overLocation').classList[2]+"."+document.getElementById('overLocation').classList[1]+".items")[0].remove();
+        off(document.getElementById('overLocation'))
       }
       else{
-        flashColour(e);
+        flashColour(result['status']['description'])
       }
     },
     error:function(){
-      flashColour(e)
+      flashColour()
     }
   });
 }
-function updateDepartment(e){
-  if (e.childNodes[0].childNodes[0].value&&!e.childNodes[0].childNodes[0].value.split(/[ a-zA-Z \-]/).join("")){
+
+function getDepartmentByID(){
+  $.ajax({
+    url: "libs/php/getDepartmentByID.php",
+    type: "POST",
+    dataType: "json",
+    data: {
+      did: document.getElementById('overDepartment').classList[1],
+    },
+    success :function(result) {
+      $("."+document.getElementById('overDepartment').classList[2]+"."+document.getElementById('overDepartment').classList[1]+".items")[0].childNodes[0].childNodes[0].innerHTML=result['data'][0]['name'];
+    }  
+  })
+}
+function getLocationByID(){
+  $.ajax({
+    url: "libs/php/getLocationByID.php",
+    type: "POST",
+    dataType: "json",
+    data: {
+      lid: document.getElementById('overLocation').classList[1],
+    },
+    success :function(result) {
+      $("."+document.getElementById('overLocation').classList[2]+"."+document.getElementById('overLocation').classList[1]+".items")[0].childNodes[0].childNodes[0].innerHTML=result['data'][0]['name'];
+    }  
+  })
+}
+
+function updateDepartment(){
+  if ($('#department').val()&&!$('#department').val().split(/[ a-zA-Z \-]/).join("")){
     $.ajax({
     url: "libs/php/updateDepartment.php",
     type: "POST",
     dataType: "json",
     data: {
-      did: e.classList[3],
-      dame: e.childNodes[0].childNodes[0].value,
+      did: document.getElementById('overDepartment').classList[1],
+      dame: $('#department').val(),
     },
-    success:function(){
-      flashColour(e,"limegreen");
+    success:function(result){
+      flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');
+      getDepartmentByID()
     },
     error:function(){
-      flashColour(e)
+      flashColour()
     }
   });
   }
   else{
-    flashColour(e,"#ffcc00");
+    flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png');
   }
 }
-
-function updateLocation(e){
-  if (e.childNodes[0].childNodes[0].value&&!e.childNodes[0].childNodes[0].value.split(/[ a-zA-Z \-]/).join("")){
+function updateLocation(){
+  if ($('#location').val()&&!$('#location').val().split(/[ a-zA-Z \-]/).join("")){
     $.ajax({
-      url: "libs/php/updateLocation.php",
-      type: "POST",
-      dataType: "json",
-      data: {
-        lid: e.classList[3],
-        lame: e.childNodes[0].childNodes[0].value,
-      },
-      success:function(){
-        flashColour(e,"limegreen");
-      },
-      error:function(){
-        flashColour(e);
-      }
-    });
+    url: "libs/php/updateLocation.php",
+    type: "POST",
+    dataType: "json",
+    data: {
+      lid: document.getElementById('overLocation').classList[1],
+      lame: $('#location').val(),
+    },
+    success:function(result){
+      flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');
+      getLocationByID();
+    },
+    error:function(){
+      flashColour()
+    }
+  });
   }
   else{
-    flashColour(e,"#ffcc00");
+    flashColour('INVALID: Errounous Input',"#daae00",'https://i.ibb.co/88G1M9M/invalid.png');
   }
 }

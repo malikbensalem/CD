@@ -1,70 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>MB Directory</title>
   <meta charset="utf-8">
-  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png"/>
+  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="vendors/bootstrap.css">
+  <script src="vendors/jquery.js"></script>
+  <script src="vendors/popper.js"></script>
+  <script src="vendors/bootstrap.js"></script>
   <link rel="stylesheet" href="libs/css/main.css">
-  <script src="libs/js/home.js"></script>
 </head>
+
 <body>
 
-<div class="jumbotron text-center">
-  <h1 id="top">Company Directory</h1>
-
-  <div class="row">
-    <div class="col-lg-2">
-      <input  id="firstName" placeholder="First Name...">
-  </div>
-    <div class="col-lg-2">
-      <input  id="lastName" placeholder="Last Name...">
-  </div>
-    <div class="col-lg-2">
-      <input  id="email" placeholder="Email...">
-  </div>
-  <div class="col-lg-2">
-    <input  id="jobTitle" placeholder="Job...">
-  </div>
-    <div class="col-lg-2">
-      <select  id="department">
-        <option value="" selected>Department</option>
-      </select>
-  </div>
-    <div class="col-lg-2">
-      <select  id="location">
-        <option value="" selected>Location</option>
-      </select>
-  </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <button onclick="search()">Search</button>
-    </div> 
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <button onclick="document.location='add.html'">Add</button>
+  <div class="header text-center">
+    <h1 id="top">Company Directory</h1>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <button onclick="document.location='add.html'">Add</button>
+      </div>
+      <div class="col-sm-4">
+        <button onclick="document.location='ld.html'">Location / Department</button>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <button onclick="document.location='ld.html'">Location / Department</button>
   </div>
+  <div class="searcher" style="margin-bottom: 10px;">
+    <div class="row">
+      <div class="col-lg-2">
+        <input id="firstName" placeholder="First Name...">
+      </div>
+      <div class="col-lg-2">
+        <input id="lastName" placeholder="Last Name...">
+      </div>
+      <div class="col-lg-2">
+        <input id="email" placeholder="Email...">
+      </div>
+      <div class="col-lg-1">
+        <input id="jobTitle" placeholder="Job...">
+      </div>
+      <div class="col-lg-2">
+        <select id="department">
+          <option value="" selected>Department</option>
+        </select>
+      </div>
+      <div class="col-lg-2">
+        <select id="location">
+          <option value="" selected>Location</option>
+        </select>
+      </div>
+      <div class="col-lg-1">
+        <button onclick="search()">Search</button>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="container" id="items">
+  <a href="#top">
+    <img id="goTop" src="https://cdn.onlinewebfonts.com/svg/img_118804.png" alt="up">
+  </a>
+
+  <div class="contain" id="items">
+    <div class="overlay" id="personnel" style="background-color: white;">
+      <div class="headerP text-center">
+        <h1>Company Directory</h1>
+      </div>
+      <div class="oForm">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Edit Personnel</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>First Name:</p>
+          </div>
+          <div class="col-sm-6">
+            <input id="overFirstName" placeholder="First Name...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Last Name:</p>
+          </div>
+          <div class="col-sm-6">
+            <input id="overLastName" placeholder="Last Name...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Email:</p>
+          </div>
+          <div class="col-sm-6">
+            <input id="overEmail" placeholder="First Name...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Job:</p>
+          </div>
+          <div class="col-sm-6">
+            <input id="overJob" placeholder="Job...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Department:</p>
+          </div>
+          <div class="col-sm-6">
+            <select id="overDepartment">
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement.parentElement)">Back</button>
+          </div>
+          <div class="col-sm-4">
+            <button style="height:50px;" onclick="dele(document.getElementById(this.parentElement.parentElement.parentElement.parentElement.classList[1]))">Remove</button>
+          </div>
+          <div class="col-sm-4">
+            <button style="height:50px;" onclick="update(document.getElementById(this.parentElement.parentElement.parentElement.parentElement.classList[1]),$('#overFirstName').val(),$('#overLastName').val(),$('#overEmail').val(),$('#overJob').val(),$('#overDepartment').val())">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirmation">
+    <img id="confirmationImg" width="39">
+    <p id="confirmationTxt"></p>
+  </div>
+  <!-- https://i.ibb.co/88G1M9M/invalid.png -->
+  <!-- https://i.ibb.co/ZmTDCrz/success.png -->
+  <!-- https://i.ibb.co/GHhYS5Y/error.png -->
   
-</div>
-
-<div class="footer">
-  <button onclick="document.location='#top'">Top</button>
-
-</div>
-
+  <script src="libs/js/home.js"></script>
 </body>
 </html>
