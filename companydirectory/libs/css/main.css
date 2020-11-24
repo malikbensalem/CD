@@ -1,28 +1,43 @@
-
+@font-face {
+  font-family: uFont;
+  src: url(Ubuntu-Light.ttf);
+}
 
 body{
-  padding-bottom: 50px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: uFont,Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  background-color:#2a2b2a;
+  color: rgb(233, 247, 235);  
 }
 select,button,input{
-  width: 100%;
+  /* width: 100%; */
   margin: 5px;
 }
+h1{
+  padding-left:10px;
+}
+
+.header p{
+  margin-bottom:2px;
+  border-bottom:2px solid white;
+}
 button{
-  border-color:#0C2D48;
-  border-style:solid;
-  border-radius: 5px;
-  background-color:white ;
-  color: #0C2D48;
+  border-color:transparent;
+  background-color:transparent;
+}
+.items button{
+  margin-left: 35px;
+  background-color: transparent;
+  border: transparent;
 }
 a{
   color:black;
 }
 .items{
   border-bottom: 2px double #0C2D48;
-  color:#0C2D48;
+  color:#292c2a;
   font-weight:bold;
+  background-color: rgb(228, 231, 230);
 }
 .items p{
   margin:0px;
@@ -30,7 +45,11 @@ a{
   padding-left:50px;
   overflow: hidden;
   text-overflow: ellipsis;
-
+}
+.navbar{
+  position: fixed !important;
+  width:100%;
+  z-index:9;
 }
 .footer {
   position: fixed;
@@ -56,38 +75,42 @@ a{
   overflow-y:auto;
 }
 .header,.headerP,.searcher{
-  padding: 20px;
-  background-color:#0C2D48;
-  color:#B1D4E0;
+  padding-top: 60px;
+  padding-bottom: 10px;
+  background-color:#2a2b2a;
+  color: rgb(233, 247, 235);
+}
+.searcher{
+  display:none;
 }
 .headerP{
   margin-bottom: 40px;
 }
+button img{
+  width: 20px;
+}
+.oForm input,.oForm select{
+  width:100%;
+}
 .oForm{
-  background-color:#0C2D48;
-  color:#B1D4E0;
+  background-color:#2a2b2a;
+  color: rgb(233, 247, 235);
   width:80%; 
   padding:20px;
   border-radius:20px;
   margin:auto;
+  padding-right:25px;
+  
 }
-#goTop {
-  background-color: aliceblue;
-  position: sticky;
-  top: 0;
-  width: 25px;
-  display: block;
-  transition: top 0.3s;
-  border-radius: 5px;
-  margin: 5px;
-  z-index: 1;
-  box-shadow: 0px 5px 5px darkgray;
+select, input{
+  color: #2a2b2a;
+}
+.items:nth-child(odd) {
+  background: rgb(196, 197, 196);
 }
 .header button{
   padding:5px;
 }
-
-
 .vertical-center {
   margin: 0;
   position: absolute;
@@ -100,7 +123,7 @@ a{
   width: 270px;
   position: fixed;
   height: 45px;
-  top: 0;
+  top: 62px;
   right: 0;
   bottom: 0;
   z-index: 6;
@@ -114,11 +137,18 @@ a{
 #confirmation img{
   width:40;
 }
+.navbar-brand{
+  color: white !important;
+}
 
 #confirmation:hover{
   opacity: 1;
 }
-
+.info p{
+  margin-bottom:2px;
+  border-bottom:2px solid white;
+  margin-left:35px;
+}
 #confirmation p{
   margin: 0;
   position: absolute;

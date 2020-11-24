@@ -46,7 +46,7 @@ function popSel(res,iid,dir="name") {
   res.forEach(element => {
     op = document.createElement("option");
     op.appendChild(document.createTextNode(element[dir]));
-    op.value=op.value.split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")
+    op.value=op.value.split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("").toLowerCase()
     document.getElementById(iid).appendChild(op);
   });
 }
@@ -87,9 +87,14 @@ function options(row,iid,element,size,vals="") {
   $(sel).val(element.split(" ").join("0"))    
   row.appendChild(sel);  
 }
-function btn(row,txt,size=1){
+function btn(row,size=1){
   rem= document.createElement("button");
-  rem.appendChild(document.createTextNode(txt));
+  x = document.createElement("IMG");
+  x.setAttribute("src", "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_edit-writing-content-editing-512.png");
+  x.setAttribute("width", "20");
+  x.setAttribute("alt", "Edit");
+  rem.appendChild(x)
+
   $(rem).addClass("col-lg-"+size);
   row.appendChild(rem);  
     rem.addEventListener("click", function(){
@@ -140,7 +145,7 @@ $(window).on('load', function() {
         result['data'].forEach(element => {
           row = document.createElement("div");
 
-          $(row).addClass("row").addClass("items").addClass(element['firstName']).addClass(element['lastName'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")).addClass(element['jobTitle'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")).addClass(element['email'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("")).addClass(element['dip']).addClass(element['location'].split(" ").join(""));
+          $(row).addClass("row").addClass("items").addClass(element['firstName'].toLowerCase()).addClass(element['lastName'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("").toLowerCase()).addClass(element['jobTitle'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("").toLowerCase()).addClass(element['email'].split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("").toLowerCase()).addClass(element['dip']).addClass(element['location'].split(" ").join("").toLowerCase());
           row.id=element['id'];
          
           column(row,element['firstName']);
@@ -150,7 +155,7 @@ $(window).on('load', function() {
           column(row,element['department'],"2");
           column(row,element['location'],"2");
 
-          btn(row,"Edit");
+          btn(row);
           
           document.getElementById("items").appendChild(row);
         });
@@ -159,7 +164,7 @@ $(window).on('load', function() {
   })
 })
 
-function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
+function flashColour(txt="ERROR: Something went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
   document.getElementById('confirmation').style.display = "block";
   document.getElementById('confirmation').style.backgroundColor = cc;
   document.getElementById('confirmationTxt').innerHTML=txt;
@@ -169,13 +174,7 @@ function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="
 }
 
 function search(e){
-  all="";
-  all+= $('#firstName').val() ? '.'+$('#firstName').val() : '';
-  all+= $('#lastName').val() ? '.'+$('#lastName').val().split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("") : '';
-  all+= $('#email').val() ? '.'+$('#email').val().split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("") : '';
-  all+= $('#jobTitle').val() ? '.'+$('#jobTitle').val().split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("") : '';
-  all+= $('#location').val() ? '.'+$('#location').val().split(/[ !?@#\$%\^\&*\)\(+=._-]/).join("") : '';
-  all+= $('#department').val() ? '.'+$('#department').val().split(" ").join("") : '';
+  all=$('#search').val() ? '.'+$('#search').val().split(/[!?@#\$%\^\&*\)\(+=._-]/).join("").split(" ").join(".").toLowerCase() :"";
   if (all){
     searcher($('.items'),'none');
     searcher($(all));

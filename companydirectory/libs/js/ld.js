@@ -21,11 +21,55 @@ function on(iid,ld,cl,vid="#location"){
   document.getElementById(iid).style.display="block";
   document.getElementById(iid).classList=`overlay ${cl[3]} ${cl[2]}`;
 }
+function onL(dep,cl) {
+  
+  $('dLocation').remove($('dLocation').childNodes); 
+  $.ajax({
+    url: "libs/php/getLD.php",
+    type: 'POST',
+    dataType: 'json',
+    success: function(result) {
+      $('#dLocation').remove(document.getElementById('dLocation').childNodes)
+      $('#department').val(dep);
+      document.getElementById('overDepartment').classList=`overlay ${cl[3]} ${cl[2]}`
+
+      document.getElementById('overDepartment').style.display="block";
+      for (let i = 0; i < result['data']['location'].length; i++) {
+        op = document.createElement("option");
+        op.appendChild(document.createTextNode(result['data']['location'][i]['name']));
+        op.value=result['data']['location'][i]['id'];
+        document.getElementById('dLocation').appendChild(op);    
+      }
+      $.ajax({
+        url: "libs/php/getDepartmentByID.php",
+        type: 'POST',
+        dataType: 'json',
+        data:{
+          did:cl[3]
+        },
+        success: function(result) {
+          console.log(result)
+        $('#dLocation').val(result['data'][0]['locationID'])
+        }
+      })    
+
+      
+      $('#dLocation').val(x);
+
+    }
+  }) 
+
+}
 
 
-function btnL(row,txt){
+function btnL(row){
   rem= document.createElement("button");
-  rem.appendChild(document.createTextNode(txt));
+  x = document.createElement("IMG");
+  x.setAttribute("src", "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_edit-writing-content-editing-512.png");
+  x.setAttribute("width", "20");
+  x.setAttribute("alt", "Edit");
+  rem.appendChild(x)
+
   $(rem).addClass("col-sm-2");
   rem.addEventListener("click", function(){
     on("overLocation",row.childNodes[0].childNodes[0].innerHTML,row.classList);
@@ -33,12 +77,18 @@ function btnL(row,txt){
   
   row.appendChild(rem);
 }
-function btnD(row,txt){
+function btnD(row){
   rem= document.createElement("button");
-  rem.appendChild(document.createTextNode(txt));
-  $(rem).addClass("col-sm-2");
+  x = document.createElement("IMG");
+  x.setAttribute("src", "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_edit-writing-content-editing-512.png");
+  x.setAttribute("width", "20");
+  x.setAttribute("alt", "Edit");
+  rem.appendChild(x)
+$(rem).addClass("col-sm-2");
   rem.addEventListener("click", function(){
-    on("overDepartment",row.childNodes[0].childNodes[0].innerHTML,row.classList,"#department");
+    onL(row.childNodes[0].childNodes[0].innerHTML,row.classList);
+
+    // on("overDepartment",row.childNodes[0].childNodes[0].innerHTML,row.classList,"#department");
   })
   row.appendChild(rem);
 }
@@ -53,10 +103,10 @@ function loop(res,op){
     $(row).addClass("row").addClass("items").addClass(op).addClass(element['id']);
     editable(row,element['name'])
     if (op=='Department'){
-      btnD(row,"Edit");
+      btnD(row);
     }
     else{
-      btnL(row,"Edit");
+      btnL(row);
     }
     document.getElementById("items").appendChild(row);
   });
@@ -68,7 +118,8 @@ $(window).on('load', function() {
     dataType: 'json',
     success: function(result) {
       loop(result['data']['department'],'Department')
-      loop(result['data']['location'],'Location')    
+      loop(result['data']['location'],'Location')  
+      console.log(result)  
       fillLocationSele()
     }
   })
@@ -82,7 +133,7 @@ function fillLocationSele(){
   })
 }
 
-function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
+function flashColour(txt="ERROR: Something went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
   document.getElementById('confirmation').style.display = "block";
   document.getElementById('confirmation').style.backgroundColor = cc;
   document.getElementById('confirmationTxt').innerHTML=txt;
@@ -182,6 +233,7 @@ function updateDepartment(){
     data: {
       did: document.getElementById('overDepartment').classList[1],
       dame: $('#department').val(),
+      lid:$('#dLocation').val()
     },
     success:function(result){
       flashColour(result['status']['description'],"limegreen",'https://i.ibb.co/ZmTDCrz/success.png');

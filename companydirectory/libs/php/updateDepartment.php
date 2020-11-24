@@ -22,7 +22,8 @@ if (mysqli_connect_errno()) {
 // $_REQUEST used for development / debugging. Remember to cange to $_POST for production
 $dame = $_POST['dame'];
 $did = $_POST['did'];
-$query = "UPDATE department SET name = '$dame' WHERE id='$did'";
+$lid=$_POST['lid'];
+$query = "UPDATE department SET name = '$dame',locationID='$lid'  WHERE id='$did'";
 $result = $conn->query($query);
 if (!$result) {
   $output['status']['code'] = "400";

@@ -10,7 +10,7 @@ $(window).on('load', function() {
     }
   })
 })
-function flashColour(txt="ERROR: Somethig went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
+function flashColour(txt="ERROR: Something went wrong",cc="mediumvioletred",img="https://i.ibb.co/GHhYS5Y/error.png"){
   document.getElementById('confirmation').style.display = "block";
   document.getElementById('confirmation').style.backgroundColor = cc;
   document.getElementById('confirmationTxt').innerHTML=txt;

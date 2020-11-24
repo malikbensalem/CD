@@ -33,7 +33,7 @@
 
 	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
 
-	$query = 'SELECT name FROM department WHERE id = ' . $_POST['did'];
+	$query = 'SELECT * FROM department WHERE id = ' . $_POST['did'];
 
 	$result = $conn->query($query);
 	

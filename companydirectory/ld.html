@@ -9,29 +9,38 @@
   <script src="vendors/jquery.js"></script>
   <script src="vendors/popper.js"></script>
   <script src="vendors/bootstrap.js"></script>
+
   <link rel="stylesheet" href="libs/css/main.css">
   <link rel="stylesheet" href="libs/css/ld.css">
 </head>
 <body>
 
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <p class="navbar-brand">Company Directory</p>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="add.html"><img src="https://cdn1.iconfinder.com/data/icons/aami-flat-files/64/files-12-512.png" height="25" alt=""></a></li>
+          <li><a href="ld.html"><img src="https://cdn3.iconfinder.com/data/icons/office-flat-colorful/614/3143_-_Office_Building-512.png" height="25" alt=""></a></li>
+          <li><a href="index.html"><img src="http://360-resource.com/wp-content/uploads/2016/07/grab-vector-graphic-person-icon-imagebasket-13.png" height="25" alt=""></a></li>
+        </ul>
+       </div>
+    </div>
+  </nav>
+
+
 <div class="header text-center">
-  <h1 id="top">Company Directory</h1>
-
-  <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-4">
-      <button onclick="document.location='add.html'">Add</button>
-    </div>
-    <div class="col-sm-4">
-      <button onclick="document.location='../companydirectory/'">Personnel</button>
-    </div>
-  </div>
+  <h1 id="top">Location / Department</h1>
 </div>
-<a href="#top">
-  <img id="goTop" src="https://cdn.onlinewebfonts.com/svg/img_118804.png" alt="up">
-</a>
 
-<div class="container" id="items">
+<div class="contain" id="items">
 
 </div>
 
@@ -54,9 +63,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4"><button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement.parentElement)">Back</button></div>
-      <div class="col-sm-4"><button style="height:50px;"onclick="deleteLocation()">Remove</button></div>
-      <div class="col-sm-4"><button style="height:50px;" onclick="updateLocation()">Save</button></div>
+      <div class="col-sm-4"><button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement.parentElement)"><img src="https://cdn4.iconfinder.com/data/icons/controls-add-on-flat/48/Contols_-_Add_On-32-512.png" alt="Back"></button></div>
+      <div class="col-sm-4"><button style="height:50px;"onclick="deleteLocation()"><img src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/close-circle-red-512.png" alt="Delete"></button></div>
+      <div class="col-sm-4"><button style="height:50px;" onclick="updateLocation()"><img src="https://image.flaticon.com/icons/png/512/179/179577.png" alt="Save"></button></div>
     </div>
   </div>
 </div>
@@ -81,9 +90,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4"><button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement.parentElement)">Back</button></div>
-      <div class="col-sm-4"><button style="height:50px;"onclick="deleteDepartment()">Remove</button></div>
-      <div class="col-sm-4"><button style="height:50px;" onclick="updateDepartment()">Save</button></div>
+      <div class="col-sm-6">
+        <p>Location:</p>
+      </div>
+      <div class="col-sm-6" >
+        <select id="dLocation" placeholder="Location..">
+          </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4"><button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement.parentElement)"><img src="https://cdn4.iconfinder.com/data/icons/controls-add-on-flat/48/Contols_-_Add_On-32-512.png" alt="Back"></button></div>
+      <div class="col-sm-4"><button style="height:50px;"onclick="deleteDepartment()"><img src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/close-circle-red-512.png" alt="Delete"></button></div>
+      <div class="col-sm-4"><button style="height:50px;" onclick="updateDepartment()"><img src="https://image.flaticon.com/icons/png/512/179/179577.png" alt="Save"></button></div>
     </div>
   </div>
 </div>
