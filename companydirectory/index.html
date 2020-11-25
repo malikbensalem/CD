@@ -7,11 +7,7 @@
   <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="vendors/bootstrap.css">
-  <script src="vendors/jquery.js"></script>
-  <script src="vendors/popper.js"></script>
-  <script src="vendors/bootstrap.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+  <link rel="stylesheet" href="vendors/awesome.css">
   <link rel="stylesheet" href="libs/css/main.css">
 </head>
 
@@ -29,10 +25,11 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="add.html"><img src="https://cdn1.iconfinder.com/data/icons/aami-flat-files/64/files-12-512.png" height="25" alt=""></a></li>
-          <li><a href="ld.html"><img src="https://cdn3.iconfinder.com/data/icons/office-flat-colorful/614/3143_-_Office_Building-512.png" height="25" alt=""></a></li>
-          <li><a href="index.html"><img src="http://360-resource.com/wp-content/uploads/2016/07/grab-vector-graphic-person-icon-imagebasket-13.png" height="25" alt=""></a></li>
-        </ul>
+          <li><a href="add.html"><img src="img/add.jpg" height="25" alt="add"></a></li>
+          <li><a href="location.html"><img src="img/location.jpg" height="25" alt="Location"></a></li>
+          <li><a href="department.html"><img src="img/build.jpg" height="25" alt="department"></a></li>
+          <li><a href="index.html"><img src="img/person.jpg" height="25" alt="personnel"></a></li>
+      </ul>
         <ul class="nav navbar-nav navbar-right">
           <li> <input id="search" type="text" placeholder="Search.."><button onclick="search()"><i class="fa fa-search"></i></button></li>
         </ul>
@@ -40,11 +37,10 @@
     </div>
   </nav>
 
-
-  <div class="header info">
+  <div class="header">
     <h1 id="top">Personnel</h1>
   </div>
-  <div class="row info">
+  <div class="row info sticky">
     <div class="col-lg-1"><p>First</p></div>
     <div class="col-lg-1"><p>Last</p></div>
     <div class="col-lg-3"><p>Email</p></div>
@@ -85,9 +81,6 @@
  
   <div class="contain" id="items">
     <div class="overlay" id="personnel" style="background-color: white;">
-      <div class="headerP text-center">
-        <h1>Company Directory</h1>
-      </div>
       <div class="oForm">
         <div class="row">
           <div class="col-sm-12">
@@ -136,15 +129,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4">
-            <button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement.parentElement)"><img src="https://cdn4.iconfinder.com/data/icons/controls-add-on-flat/48/Contols_-_Add_On-32-512.png" alt="Back"></button>
-          </div>
-          <div class="col-sm-4">
-            <button style="height:50px;" onclick="dele(document.getElementById(this.parentElement.parentElement.parentElement.parentElement.classList[1]))"><img src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/close-circle-red-512.png" alt="Delete"></button>
-          </div>
-          <div class="col-sm-4">
-            <button style="height:50px;" onclick="update(document.getElementById(this.parentElement.parentElement.parentElement.parentElement.classList[1]),$('#overFirstName').val(),$('#overLastName').val(),$('#overEmail').val(),$('#overJob').val(),$('#overDepartment').val())"><img src="https://image.flaticon.com/icons/png/512/179/179577.png" alt="Save"></button>
-          </div>
+          <button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement)"><img src="img/back.jpg" alt="Back"></button>
+          <button style="height:50px;" onclick="dele(document.getElementById(this.parentElement.parentElement.parentElement.classList[1]))"><img src="img/remove.jpg" alt="Delete"></button>
+          <button style="height:50px;" onclick="update(document.getElementById(this.parentElement.parentElement.parentElement.classList[1]),$('#overFirstName').val(),$('#overLastName').val(),$('#overEmail').val(),$('#overJob').val(),$('#overDepartment').val())"><img src="img/save.jpg" alt="Save"></button>
         </div>
       </div>
     </div>
@@ -153,9 +140,10 @@
     <img id="confirmationImg" width="39">
     <p id="confirmationTxt"></p>
   </div>
-  <!-- https://i.ibb.co/88G1M9M/invalid.png -->
-  <!-- https://i.ibb.co/ZmTDCrz/success.png -->
-  <!-- https://i.ibb.co/GHhYS5Y/error.png -->
+  
+  <script src="vendors/jquery.js"></script>
+  <script src="vendors/popper.js"></script>
+  <script src="vendors/bootstrap.js"></script> 
   
   <script src="libs/js/home.js"></script>
 </body>

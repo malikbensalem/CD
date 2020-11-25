@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MB Directory</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendors/bootstrap.css">
+    <link rel="stylesheet" href="vendors/awesome.css">
+    <link rel="stylesheet" href="libs/css/main.css">
+    <link rel="stylesheet" href="libs/css/ld.css">
+  </head>
+  <body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <p class="navbar-brand">Company Directory</p>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="add.html"><img src="img/add.jpg" height="25" alt="add"></a></li>
+          <li><a href="location.html"><img src="img/location.jpg" height="25" alt="Location"></a></li>
+          <li><a href="department.html"><img src="img/build.jpg" height="25" alt="department"></a></li>
+          <li><a href="index.html"><img src="img/person.jpg" height="25" alt="personnel"></a></li>
+        </ul>
+       </div>
+    </div>
+  </nav>
+  
+<div class="header info">
+  <h1>Department</h1>
+</div>
+
+<div class="contain" id="items">
+
+</div>
+
+<div class="overlay" id="overLocation" style="background-color: white;">
+  <div class="oForm">
+    <div class="row" >
+      <div class="col-sm-12">
+        <h2>Edit Location</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Location:</p>
+      </div>
+      <div class="col-sm-6">
+        <input id="location" placeholder="Location...">
+      </div>
+    </div>
+      <button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement)"><img src="img/back.jpg" alt="Back"></button>
+      <button style="height:50px;"onclick="deleteLocation()"><img src="img/remove.jpg" alt="Delete"></button>
+      <button style="height:50px;" onclick="updateLocation()"><img src="img/save.jpg" alt="Save"></button>
+   </div>
+</div>
+
+
+<div class="overlay" id="overDepartment" style="background-color: white;">
+  <div class="oForm">
+    <div class="row" >
+      <div class="col-sm-12">
+        <h2>Edit Department</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Department:</p>
+      </div>
+      <div class="col-sm-6">
+        <input id="department" placeholder="Department..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Location:</p>
+      </div>
+      <div class="col-sm-6" >
+        <select id="dLocation" placeholder="Location..">
+          </select>
+      </div>
+    </div>
+    <div class="row">
+      <button style="height:50px;" onclick="off(this.parentElement.parentElement.parentElement)"><img src="img/back.jpg" alt="Back"></button>
+      <button style="height:50px;"onclick="deleteDepartment()"><img src="img/remove.jpg" alt="Delete"></button>
+      <button style="height:50px;" onclick="updateDepartment()"><img src="img/save.jpg" alt="Save"></button>
+    </div>
+  </div>
+</div>
+
+<div id="confirmation">
+  <img id="confirmationImg" width="39">
+  <p id="confirmationTxt"></p>
+</div>
+
+<script src="vendors/jquery.js"></script>
+<script src="vendors/popper.js"></script>
+<script src="vendors/bootstrap.js"></script> 
+
+<script src="libs/js/department.js"></script>
+</body>
+</html>

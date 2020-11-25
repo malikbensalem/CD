@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>MB Directory</title>
-  <meta charset="utf-8">
-  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="vendors/bootstrap.css">
-  <script src="vendors/jquery.js"></script>
-  <script src="vendors/popper.js"></script>
-  <script src="vendors/bootstrap.js"></script>
+  <head>
+    <title>MB Directory</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/business-450/47/Telephone_directory-512.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendors/bootstrap.css">
+    <link rel="stylesheet" href="vendors/awesome.css">
+    <link rel="stylesheet" href="libs/css/main.css">
+    <link rel="stylesheet" href="libs/css/add.css">
+  </head>
   
-  <link rel="stylesheet" href="libs/css/main.css">
-  <link rel="stylesheet" href="libs/css/add.css">
-</head>
-
 <body>
-
 
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -30,16 +26,16 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="add.html"><img src="https://cdn1.iconfinder.com/data/icons/aami-flat-files/64/files-12-512.png" height="25" alt=""></a></li>
-          <li><a href="ld.html"><img src="https://cdn3.iconfinder.com/data/icons/office-flat-colorful/614/3143_-_Office_Building-512.png" height="25" alt=""></a></li>
-          <li><a href="index.html"><img src="http://360-resource.com/wp-content/uploads/2016/07/grab-vector-graphic-person-icon-imagebasket-13.png" height="25" alt=""></a></li>
+          <li><a href="add.html"><img src="img/add.jpg" height="25" alt="add"></a></li>
+          <li><a href="location.html"><img src="img/location.jpg" height="25" alt="Location"></a></li>
+          <li><a href="department.html"><img src="img/build.jpg" height="25" alt="department"></a></li>
+          <li><a href="index.html"><img src="img/person.jpg" height="25" alt="personnel"></a></li>
         </ul>
        </div>
     </div>
   </nav>
 
-
-  <div class="header ">
+  <div class="header info">
     <h1 id="top">Add</h1>
     <div class="row">
      </div>
@@ -64,7 +60,7 @@
         </div>
 
         <div class="col-sm-6">
-          <button onclick="insertLocation()"><img src="https://image.flaticon.com/icons/png/512/179/179577.png" alt="add"></button>
+          <button onclick="insertLocation()"><img src="img/save.jpg" alt="add"></button>
         </div>
 
       </div>
@@ -97,7 +93,7 @@
         <div class="col-sm-5">
         </div>
         <div class="col-sm-6">
-          <button onclick="insertDepartment()"><img src="https://image.flaticon.com/icons/png/512/179/179577.png" alt="add"></button>
+          <button onclick="insertDepartment()"><img src="img/save.jpg" alt="add"></button>
         </div>
       </div>
     </div>
@@ -153,7 +149,7 @@
         <div class="col-sm-5">
         </div>
         <div class="col-sm-6">
-          <button onclick="addPersonnel()"><img src="https://image.flaticon.com/icons/png/512/179/179577.png" alt="add"></button>
+          <button onclick="addPersonnel()"><img src="img/save.jpg" alt="add"></button>
         </div>
       </div>
     </div>
@@ -162,6 +158,10 @@
     <img id="confirmationImg" width="39">
     <p id="confirmationTxt"></p>
   </div>
+
+  <script src="vendors/jquery.js"></script>
+  <script src="vendors/popper.js"></script>
+  <script src="vendors/bootstrap.js"></script> 
 
   <script src="libs/js/add.js"></script>
 </body>

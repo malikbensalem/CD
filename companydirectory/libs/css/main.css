@@ -63,6 +63,7 @@ a{
   width: 29%;
 }
 .overlay {
+  padding-top:100px;
   position: fixed;
   display: none;
   width: 100%;
@@ -157,4 +158,12 @@ select, input{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   color: white;
+}
+.info {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding-top: 70px;
+  background-color: #2a2b2a;
+  z-index: 2;
 }
